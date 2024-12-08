@@ -1,0 +1,10 @@
+{
+    "article": {
+        "title": "Test Article API",
+        "description": "here is description",
+        "body": "cypress working",
+        "tagList": [
+            "test"
+        ]
+    }
+}

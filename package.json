@@ -1,0 +1,28 @@
+{
+  "name": "realworld-app",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "cy:test_dev": "npx cypress open --config baseUrl=https://conduit.bondaracademy-dev.com/ --env email=dev_username,password=123456",
+    "cy:open_process": "npx cypress open --env email=$DB_EMAIL,password=$PASSWORD",
+    "delete:reports": "rm cypress/results/junit/* || true",
+    "prereport": "npm run delete:reports",
+    "mochawesome:merge": "npx mochawesome-merge \"cypress/results/mochawesome/*.json\" > mochawesome.json && npx marge mochawesome.json",
+    "junit:merge": "npx junit-merge -d cypress/results/junit -o cypress/results/junit/result.xml",
+    "report": "cypress run --reporter cypress-multi-reporters --reporter-options configFile=reporter-config.json",
+    "cypress:run": "npm run prereport && npx cypress run",
+    "cypress:e2e": "npm run cypress:run; npm run junit:merge; npm run mochawesome:merge"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "cypress": "^13.16.1",
+    "cypress-multi-reporters": "^2.0.4",
+    "mocha-junit-reporter": "^2.2.1",
+    "mochawesome": "^7.1.3",
+    "mochawesome-merge": "^4.3.0",
+    "mochawesome-report-generator": "^6.2.0"
+  }
+}
